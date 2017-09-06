@@ -3,7 +3,6 @@
 package batchprocessor
 
 import (
-	"fmt"
 	"github.com/mohakkataria/redbubble_assignment/htmlbuilder"
 	"github.com/mohakkataria/redbubble_assignment/models"
 	"github.com/mohakkataria/redbubble_assignment/provider"
@@ -39,29 +38,26 @@ func buildHTML(provider provider.Provider, outputPath string) {
 	indexPage := models.Page{Title: indexPageTitle, Navigation: allMakes, Gallery: firstTenImages}
 	indexPageBuilder := htmlbuilder.Base{Page: indexPage, Dir: outputPath}
 	indexPageBuilder.Output()
-	fmt.Println(allMakes)
-	fmt.Println(len(allMakes))
 	// build make and model pages
 	for _, make := range allMakes {
-		if len(make) != 0 {
-			modelsOfMake := imageRepository.GetAllModelsByMake(make)
-			makePageNav := append(modelsOfMake, indexPageTitle)
-			makePageGallery := imageRepository.FindByMake(make, 10)
-			makePage := models.Page{Title: make, Navigation: makePageNav, Gallery: makePageGallery}
-			fmt.Println(makePage)
-			makePageBuilder := htmlbuilder.Base{Page: makePage, Dir: outputPath}
-			makePageBuilder.Output()
-			// build model pages of this make
-			for _, model := range modelsOfMake {
-				if len(model) != 0 {
-					modelPageNav := []string{indexPageTitle, make}
-					modelPageGallery := imageRepository.FindByMakeAndModel(make, model, 10)
-					modelPage := models.Page{Title: model, Navigation: modelPageNav, Gallery: modelPageGallery}
-					modelPageBuilder := htmlbuilder.Base{Page: modelPage, Dir: outputPath}
-					modelPageBuilder.Output()
-				}
-			}
+
+		modelsOfMake := imageRepository.GetAllModelsByMake(make)
+		makePageNav := append(modelsOfMake, indexPageTitle)
+		makePageGallery := imageRepository.FindByMake(make, 10)
+		makePage := models.Page{Title: make, Navigation: makePageNav, Gallery: makePageGallery}
+		makePageBuilder := htmlbuilder.Base{Page: makePage, Dir: outputPath}
+		makePageBuilder.Output()
+		// build model pages of this make
+		for _, model := range modelsOfMake {
+
+			modelPageNav := []string{indexPageTitle, make}
+			modelPageGallery := imageRepository.FindByMakeAndModel(make, model, 10)
+			modelPage := models.Page{Title: model, Navigation: modelPageNav, Gallery: modelPageGallery}
+			modelPageBuilder := htmlbuilder.Base{Page: modelPage, Dir: outputPath}
+			modelPageBuilder.Output()
+
 		}
+
 	}
 }
 

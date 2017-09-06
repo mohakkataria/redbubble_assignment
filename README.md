@@ -1,7 +1,7 @@
 # Redbubble Test
 
 ## Requirements
-http://take-home-test.herokuapp.com/full-stack-engineer
+http://take-home-test.herokuapp.com/product-engineer
 
 ## How to run it
 * Clone or download the repo to your local machine.
@@ -11,7 +11,7 @@ http://take-home-test.herokuapp.com/full-stack-engineer
 Run the following command in your repo directory:
 ~~~
 > go install
-> ./main {endpoint} {output_dir}
+> redbubble_assignment {output_dir}
 ~~~
 `{endpoint}` is the API url, while `{output_dir}` is the directory containing the generated files.
 

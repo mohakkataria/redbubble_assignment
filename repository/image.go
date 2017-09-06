@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/mohakkataria/redbubble_assignment/models"
 	"reflect"
+	"strings"
 )
 
 // Image repository contains the slice of Images
@@ -19,7 +20,10 @@ func (i Image) GetAllMakes() []string {
 	makes := reflect.ValueOf(imageMakes).MapKeys()
 	makesToReturn := []string{}
 	for _, make := range makes {
-		makesToReturn = append(makesToReturn, make.Interface().(string))
+		makeString := strings.TrimSpace(make.Interface().(string))
+		if makeString != "" {
+			makesToReturn = append(makesToReturn, makeString)
+		}
 	}
 	return makesToReturn
 }
@@ -36,7 +40,10 @@ func (i Image) GetAllModelsByMake(make string) []string {
 	models := reflect.ValueOf(imageModels).MapKeys()
 	modelsToReturn := []string{}
 	for _, model := range models {
-		modelsToReturn = append(modelsToReturn, model.Interface().(string))
+		modelString := strings.TrimSpace(model.Interface().(string))
+		if modelString != "" {
+			modelsToReturn = append(modelsToReturn, modelString)
+		}
 	}
 	return modelsToReturn
 }

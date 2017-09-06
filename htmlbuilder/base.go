@@ -45,6 +45,7 @@ func (b Base) Output() string {
 
 // render generates the HTML from Page properties and returns it as a string
 func (b Base) render() string {
+	fmt.Println(b.Page)
 
 	html := "<h1>" + b.Page.Title + "</h1>"
 
