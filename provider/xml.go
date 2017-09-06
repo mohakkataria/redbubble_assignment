@@ -5,13 +5,11 @@ import (
 	"github.com/mohakkataria/redbubble_assignment/models"
 )
 
-
 // XML struct contains the raw byte XML and its parsed format
 type XML struct {
-	XML []byte
+	XML       []byte
 	parsedXML models.XML
 }
-
 
 // ConvertToImages is used to convert the unparsed xml to slice of Images after parsing the XML
 // to all the metadata received from the fetched URL
@@ -25,7 +23,7 @@ func (xp XML) ConvertToImages() []models.Image {
 
 	for _, work := range works {
 		image := models.Image{}
-		image.Id = work.Id
+		image.ID = work.ID
 		for _, url := range work.URLs {
 			if url.Type == "small" {
 				image.Thumbnail = url.URL

@@ -5,12 +5,10 @@ import (
 	"reflect"
 )
 
-
 // Image repository contains the slice of Images
 type Image struct {
 	Images []models.Image
 }
-
 
 // GetAllMakes returns all the unique non empty makes of the Images in the repository
 func (i Image) GetAllMakes() []string {
@@ -43,7 +41,6 @@ func (i Image) GetAllModelsByMake(make string) []string {
 	return modelsToReturn
 }
 
-
 // FindByMake returns given number of Images of given make from the repository
 func (i Image) FindByMake(make string, limit int) []models.Image {
 	images := []models.Image{}
@@ -58,7 +55,7 @@ func (i Image) FindByMake(make string, limit int) []models.Image {
 		if length = limit; limit > len(images) {
 			length = len(images)
 		}
-		return images[:length];
+		return images[:length]
 	}
 
 	return images
@@ -78,7 +75,7 @@ func (i Image) FindByMakeAndModel(make string, model string, limit int) []models
 		if length = limit; limit > len(images) {
 			length = len(images)
 		}
-		return images[:length];
+		return images[:length]
 	}
 
 	return images
@@ -91,7 +88,7 @@ func (i Image) Find(limit int) []models.Image {
 		if length = limit; limit > len(i.Images) {
 			length = len(i.Images)
 		}
-		return i.Images[:length];
+		return i.Images[:length]
 
 	}
 	return i.Images
