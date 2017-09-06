@@ -15,18 +15,19 @@ type Base struct {
 }
 
 // Output opens the file for write and generates the html and writes it to the file.
-func (b Base) Output() {
+func (b Base) Output() string {
 	fileName := b.Page.Title + ".html"
 	path := b.Dir + "/" + fileName
 	var _, err = os.Stat(path)
 
+	html := b.render()
 	// create file if not exists
 	if os.IsNotExist(err) {
 		var file, err = os.Create(path)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
-		_, err = file.WriteString(b.render())
+		_, err = file.WriteString(html)
 		err = file.Sync()
 		defer file.Close()
 	} else {
@@ -34,10 +35,12 @@ func (b Base) Output() {
 		if err != nil {
 			fmt.Println(err.Error())
 		}
-		_, err = file.WriteString(b.render())
+		_, err = file.WriteString(html)
 		err = file.Sync()
 		defer file.Close()
 	}
+
+	return string(html)
 }
 
 // render generates the HTML from Page properties and returns it as a string
