@@ -3,6 +3,7 @@ package provider
 import (
 	"encoding/xml"
 	"github.com/mohakkataria/redbubble_assignment/models"
+	"strings"
 )
 
 // XML struct contains the raw byte XML and its parsed format
@@ -26,7 +27,7 @@ func (xp XML) ConvertToImages() []models.Image {
 		image.ID = work.ID
 		for _, url := range work.URLs {
 			if url.Type == "small" {
-				image.Thumbnail = url.URL
+				image.Thumbnail = strings.TrimSpace(url.URL)
 			}
 		}
 		image.Make = work.EXIF.Make
