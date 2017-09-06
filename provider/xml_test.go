@@ -1,12 +1,12 @@
 package provider
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestXML_ConvertToImages(t *testing.T) {
-	xmlProvider := XML{XML:[]byte(`<works>
+	xmlProvider := XML{XML: []byte(`<works>
 		<work>
 		<id>31820</id>
 		<filename>162042.jpg</filename>
@@ -95,4 +95,3 @@ func TestXML_ConvertToImages(t *testing.T) {
 
 	}
 }
-
