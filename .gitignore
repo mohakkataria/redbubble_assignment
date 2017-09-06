@@ -1,0 +1,6 @@
+.idea
+.DS_Store
+.idea/*
+vendor
+main
+output_directory/*
